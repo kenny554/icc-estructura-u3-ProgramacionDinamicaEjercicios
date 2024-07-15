@@ -27,9 +27,27 @@ import java.util.List;
  * 
  * Ecoja la mejor estructura de datos para que sea mas eficiente
  */
+
 public class EjercicioUno {
 
-    // List<List<Integer>> subsets(List<Integer> set) {
+    public List<List<Integer>> subsets(List<Integer> set) {
+        List<List<Integer>> result = new ArrayList<>();
+        addsetByElement(set, 0, new ArrayList<>(), result);
 
-    // }
+        return result;
+    }
+
+    public void addsetByElement(List<Integer> set, int index, List<Integer> currentSubset, List<List<Integer>> result) {
+        if (index == set.size()) {
+            result.add(new ArrayList<>(currentSubset));
+            return;
+
+        }
+        currentSubset.add(set.get(index));
+        addsetByElement(set, index + 1, currentSubset, result);
+
+        currentSubset.remove(currentSubset.size() - 1);
+        addsetByElement(set, index + 1, currentSubset, result);
+
+    }
 }
